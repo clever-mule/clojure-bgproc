@@ -1,3 +1,3 @@
 (ns clojure-bgproc.settings)
 
-(def db {:dbtype "sqlite" :dbname "../webface/cordis-h2020.db"})
+(def ^:dynamic *db* {:dbtype "sqlite" :dbname "../webface/cordis-h2020.db"})
