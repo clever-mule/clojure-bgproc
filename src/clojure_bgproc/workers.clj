@@ -12,3 +12,11 @@
       (write-data data w))
     )
   )
+
+(defn run-async [worker-info params filename]
+  (future (run worker-info params filename)))
+
+(defn run-in [seconds worker-info params filename]
+  (future
+    (Thread/sleep (* 1000 seconds))
+    (run worker-info params filename)))
