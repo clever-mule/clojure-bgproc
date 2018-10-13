@@ -6,6 +6,7 @@
 
 (defn with-db [f]
   (j/with-db-transaction [tr-conn (db-config)]
+    (j/db-set-rollback-only! tr-conn)
     (with-redefs [*db* tr-conn]
       (f)))
   )

@@ -6,14 +6,15 @@
 (def query "SELECT organizations.id,
        name,
        short_name,
-       EXTRACT('month' FROM date_trunc('month', start_date)) AS month,
-       EXTRACT('year' FROM date_trunc('month', start_date))  AS year,
+       EXTRACT('month' FROM date_trunc('month', start_date))::smallint AS month,
+       EXTRACT('year' FROM date_trunc('month', start_date))::smallint  AS year,
        COUNT(DISTINCT pr.rcn)                                AS projects_count
   FROM organizations
          JOIN participations p ON organizations.id = p.organization_id
          JOIN projects pr ON p.project_rcn = pr.rcn AND p.project_id = pr.id
   WHERE start_date BETWEEN ? AND ?
-  GROUP BY date_trunc('month', start_date), organizations.id, name")
+  GROUP BY date_trunc('month', start_date), organizations.id, name
+  ORDER BY organizations.id")
 
 (defn- make-sql-date [year month day]
   (java.sql.Date/valueOf (LocalDate/of year month day)))
