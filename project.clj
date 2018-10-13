@@ -6,7 +6,10 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/data.xml "0.0.8"]
                  [org.clojure/java.jdbc "0.7.8"]
-                 [org.xerial/sqlite-jdbc "3.23.1"]]
+                 [org.postgresql/postgresql "42.2.5"]
+                 [environ "1.1.0"]]
+  :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot clojure-bgproc.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:dev {:env {:app-env "dev"}}
+             :uberjar {:aot :all}})

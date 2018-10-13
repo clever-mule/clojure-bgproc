@@ -8,4 +8,4 @@
 (t/use-fixtures :once hdb/with-db)
 
 (t/deftest get-data
-  (t/is (= [] (worker-get-data {}))))
+  (t/is (= [] (worker-get-data hdb/*db* {}))))

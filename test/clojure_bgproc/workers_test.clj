@@ -10,7 +10,7 @@
 
 (def -basic-data (constantly (->> 10 range (map inc) (into []))))
 
-(defn -filtered-data [params]
+(defn -filtered-data [_db params]
   (let [from (:from params 0)]
     (filter #(>= % from) (-basic-data)))
   )
