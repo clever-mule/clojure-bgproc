@@ -7,6 +7,8 @@
                  [org.clojure/data.xml "0.0.8"]
                  [org.clojure/java.jdbc "0.7.8"]
                  [org.postgresql/postgresql "42.2.5"]
+                 [com.novemberain/langohr "5.0.0"]
+                 [org.slf4j/slf4j-simple "1.8.0-beta2"]
                  [environ "1.1.0"]]
   :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot clojure-bgproc.core
