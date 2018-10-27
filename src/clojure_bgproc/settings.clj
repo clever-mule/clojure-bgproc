@@ -11,3 +11,4 @@
 (defn- config- [] (-> (config-path) slurp edn/read-string))
 (def config (memoize config-))
 (defn db-config [] (:db (config)))
+(defn workers-count [] (:workers_count (config) 1))
