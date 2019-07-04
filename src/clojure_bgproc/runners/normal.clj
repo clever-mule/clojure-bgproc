@@ -3,8 +3,7 @@
             [langohr.channel :as rmq-ch]
             [langohr.queue :as rmq-q]
             [langohr.consumers :as rmq-cs]
-            [langohr.basic :as rmq-b]
-            [clojure-bgproc.runners :refer [exchanges]]))
+            [langohr.basic :as rmq-b]))
 
 (defn message-handler [ch {:keys [headers delivery-tag]} ^bytes payload]
   (println payload)
@@ -15,10 +14,8 @@
 
 (defn run [conn]
   (let [channel (rmq-ch/open conn)
-        qname "rmq-workers-normal"
-        queue (rmq-q/declare channel qname)]
+        qname "clever-mule:report-tasks"
+        queue (rmq-q/declare channel qname {:auto-delete false})]
     (println (format "Connected. Channel id: %d" (.getChannelNumber channel)))
-    (rmq-q/bind channel qname (:normal exchanges)
-                {:arguments {"x-dead-letter-exchange" (:error exchanges)}})
     (rmq-cs/subscribe channel qname message-handler)
     {:channel channel}))

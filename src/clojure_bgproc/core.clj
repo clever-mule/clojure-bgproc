@@ -9,7 +9,7 @@
   (rnn/run conn))
 
 (defn- run-normal-workers [conn]
-  (let [rg (range (settings/workers-count))]
+  (let [rg (range settings/workers-count)]
     (into [] (map (partial run-normal-worker conn) rg))))
 
 (defn -main
